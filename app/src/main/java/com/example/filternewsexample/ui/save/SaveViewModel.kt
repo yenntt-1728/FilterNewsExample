@@ -11,8 +11,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SaveViewModel(private val context: Context) : ViewModel() {
+class SaveViewModel @Inject constructor (private val context: Context) : ViewModel() {
     private lateinit var appDatabase: AppDataBase
     private lateinit var newsLocalRepository: NewsLocalRepository
     private var compositeDisposable = CompositeDisposable()
