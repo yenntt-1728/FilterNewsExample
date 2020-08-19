@@ -14,10 +14,12 @@ import androidx.lifecycle.Observer
 import com.example.filternewsexample.R
 import com.example.filternewsexample.adapter.MainPagerAdapter
 import com.example.filternewsexample.adapter.NewsAdapter
+import com.example.filternewsexample.di.component.ApplicationComponent
 import com.example.filternewsexample.service.NewsRepository
 import com.example.filternewsexample.ui.favourite.FavouriteFragment
 import com.example.filternewsexample.ui.news.NewsFragment
 import com.example.filternewsexample.ui.save.SaveFragment
+import dagger.android.DaggerApplication_MembersInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_new.*
 
@@ -37,9 +39,13 @@ class MainActivity : AppCompatActivity(){
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Loading")
         setUpTab()
-//        setUpPermission()
-        newRepo = NewsRepository(this)
-        mainViewModel = MainViewModel(newRepo)
+        val component: ApplicationComponent =
+            DaggerApplicationComponent.builder().application(this).build()
+        component.inject(this)
+
+////        setUpPermission()
+//        newRepo = NewsRepository(this)
+//        mainViewModel = MainViewModel(newRepo)
     }
 
     private fun setUpTab(){
